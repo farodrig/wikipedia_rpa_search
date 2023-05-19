@@ -2,9 +2,9 @@ import json
 from tempfile import NamedTemporaryFile
 
 from typer.testing import CliRunner
-from config import SRC_PATH
 
-from main import app, SCIENTISTS
+from config import SRC_PATH, SCIENTISTS
+from main import app
 
 runner = CliRunner()
 
@@ -33,7 +33,10 @@ def test_find_wikipedia_people_from_non_existent_file():
     assert result.exit_code == 1
 
 def test_find_wikipedia_people_from_non_json_file():
-    result = runner.invoke(app, ["find-wikipedia-people-from-file", "--file-path", SRC_PATH / "config.py"])
+    result = runner.invoke(
+        app, 
+        ["find-wikipedia-people-from-file", "--file-path", SRC_PATH / "config.py"]
+    )
     assert result.exit_code == 1
 
 def test_find_wikipedia_people_from_wrong_json_file():

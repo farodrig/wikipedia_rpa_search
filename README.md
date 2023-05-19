@@ -7,6 +7,10 @@ Welcome to Quandri's Robotic Researcher. This software allows you to extract som
 - :snake: Python 3.11.1
 - Chrome Driver / Gecko Driver (Selenium)
 
+## Environment Variables
+
+- WIKIPEDIA_URL: URL for wikipedia site used to extract information. Default: 'https://en.wikipedia.org/'
+
 
 ## Installation
 

@@ -3,19 +3,20 @@ from typing import Optional
 
 from RPA.Browser.Selenium import Selenium
 from selenium.webdriver.remote.webelement import WebElement
-from DTO.person_profile import PersonProfile
+from yarl import URL
 
-from config import config
+from config import WIKIPEDIA_URL
+from DTO.person_profile import PersonProfile
 from robots.robot import Robot
 
 class WikipediaRobot(Robot):
-    BASE_URL: str = config.get('WIKIPEDIA_URL')
+    BASE_URL: URL = WIKIPEDIA_URL
 
     def __init__(self, browser: Optional[Selenium] = None):
         super().__init__("Wikipedia Robot", browser)
 
     def find_article(self, word: str):
-        self.open_webpage(self.BASE_URL)
+        self.open_webpage(str(self.BASE_URL))
         old_timeout = self.browser.get_selenium_timeout()
         self.browser.set_selenium_timeout(timedelta(seconds=1))
         search_input_locator = '//*[@id="searchform"]/div/div/div[1]/input'
