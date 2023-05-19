@@ -4,9 +4,9 @@ from rich import print
 from robots.wikipedia_robot import PersonWikipediaRobot
 from typer import Context, Typer
 
+from config import SCIENTISTS
 from utils import progress_display
 
-SCIENTISTS = ["Albert Einstein", "Isaac Newton", "Marie Curie", "Charles Darwin"]
 robot = PersonWikipediaRobot()
 app = Typer(rich_markup_mode="rich")
 
