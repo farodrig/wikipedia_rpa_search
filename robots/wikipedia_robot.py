@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 from typing import Any, Dict, Optional
 
-from RPA.Browser.Selenium import AliasType, Selenium
+from RPA.Browser.Selenium import Selenium
 from selenium.webdriver.remote.webelement import WebElement
 
 from config import config
@@ -31,7 +31,6 @@ class PersonWikipediaRobot(WikipediaRobot):
     def find_person(self, person_name: str) -> Dict[str, Any]:
         self.find(person_name)
         person_data = {
-            # **(self._find_person_table_info()),
             'name': self._find_person_name(),
             'description': self._find_person_description(),
             'birth_date': self._find_person_birthdate(),
