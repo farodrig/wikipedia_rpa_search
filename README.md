@@ -1,6 +1,6 @@
 # Robotic Researcher
 
-Welcome to Quandri's Robotic Researcher. This software allows you to extract some basic information from someone using wikipedia webpage.
+Welcome to Quandri's Robotic Researcher. This software allows you to extract some basic information from someone using the Wikipedia webpage.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ Welcome to Quandri's Robotic Researcher. This software allows you to extract som
 ```
 python -m venv venv # Optional
 source venv/bin/activate # Optional
-pip install -r requirements.txt
+pip install -r requirements_dev.txt # If testing libraries are not needed, you can use the requirements.txt file
 ```
 
 ## How to run
@@ -29,7 +29,7 @@ python main.py
 - find-wikipedia-people-from-file
 - find-wikipedia-person-by-name
 
-For an explanation on how to use them run:
+For an explanation of how to use them, run:
 ```
 python main.py [COMMAND] --help
 ```
