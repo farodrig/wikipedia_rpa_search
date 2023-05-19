@@ -1,6 +1,9 @@
-from typing import Any, Callable, List, Optional, TypeVar
+from datetime import date
+from typing import Callable, List, Optional, TypeVar
 
+from dateutil.relativedelta import relativedelta
 from rich.progress import Progress
+
 
 T = TypeVar('T')
 
@@ -18,3 +21,8 @@ def progress_display(
                 progress.console.print(element_description(element))
             procedure(element)
             progress.advance(task)
+
+
+def calculate_age(start_date: date, end_date: Optional[date]) -> int:
+    age = relativedelta(end_date or date.today(), start_date)
+    return age.years

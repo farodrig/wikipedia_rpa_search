@@ -1,12 +1,12 @@
 from datetime import date, datetime, timedelta
-from typing import Any, Dict, Optional
+from typing import Optional
 
 from RPA.Browser.Selenium import Selenium
 from selenium.webdriver.remote.webelement import WebElement
+from DTO.person_profile import PersonProfile
 
 from config import config
 from robots.robot import Robot
-from robots.utils import calculate_age
 
 class WikipediaRobot(Robot):
     BASE_URL: str = config.get('WIKIPEDIA_URL')
@@ -14,7 +14,7 @@ class WikipediaRobot(Robot):
     def __init__(self, browser: Optional[Selenium] = None):
         super().__init__("Wikipedia Robot", browser)
 
-    def find(self, word: str):
+    def find_article(self, word: str):
         self.open_webpage(self.BASE_URL)
         search_input_locator = '//*[@id="searchform"]/div/div/div[1]/input'
         try:
@@ -28,18 +28,14 @@ class WikipediaRobot(Robot):
 class PersonWikipediaRobot(WikipediaRobot):
     PROFILE_INFOBOX_LOCATOR = '//*[@id="mw-content-text"]/div[1]/table[@class="infobox biography vcard"]'
 
-    def find_person(self, person_name: str) -> Dict[str, Any]:
-        self.find(person_name)
-        person_data = {
-            'name': self._find_person_name(),
-            'description': self._find_person_description(),
-            'birth_date': self._find_person_birthdate(),
-            'death_date': self._find_person_death_date(),
-        }
-        return {
-            **person_data,
-            'age': calculate_age(person_data.get('birth_date'), person_data.get('death_date'))
-        }
+    def find_person(self, person_name: str) -> PersonProfile:
+        self.find_article(person_name)
+        return PersonProfile(
+            name=self._find_person_name(),
+            description=self._find_person_description(),
+            birth_date=self._find_person_birthdate(),
+            death_date=self._find_person_death_date(),
+        )
 
     def _find_person_description(self) -> Optional[str]:
         first_stanza_locator = f'{self.PROFILE_INFOBOX_LOCATOR}/following-sibling::p[1]'

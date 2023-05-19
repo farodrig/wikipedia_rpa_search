@@ -2,13 +2,13 @@ from typing import List
 
 from rich import print
 from robots.wikipedia_robot import PersonWikipediaRobot
-import typer
+from typer import Context, Typer
 
 from utils import progress_display
 
 SCIENTISTS = ["Albert Einstein", "Isaac Newton", "Marie Curie", "Charles Darwin"]
 robot = PersonWikipediaRobot()
-app = typer.Typer(rich_markup_mode="rich")
+app = Typer(rich_markup_mode="rich")
 
 
 @app.command()
@@ -31,7 +31,7 @@ def find_wikipedia_people_by_name(people: List[str] = SCIENTISTS):
     robot.say_goodbye()
 
 @app.callback(invoke_without_command=True)
-def main(ctx: typer.Context):
+def main(ctx: Context):
     if ctx.invoked_subcommand is None:
         find_wikipedia_people_by_name()
 
