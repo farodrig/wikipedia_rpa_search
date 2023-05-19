@@ -16,4 +16,6 @@ class Robot:
         print(f"Goodbye, my name is {self.name}")
 
     def open_webpage(self, webpage) -> AliasType:
-        return self.browser.open_available_browser(webpage)
+        alias = self.browser.open_available_browser(webpage, headless=True)
+        self.browser.set_window_size(width=1920, height=1200)
+        return alias

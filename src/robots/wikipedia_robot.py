@@ -16,13 +16,19 @@ class WikipediaRobot(Robot):
 
     def find_article(self, word: str):
         self.open_webpage(self.BASE_URL)
+        old_timeout = self.browser.get_selenium_timeout()
+        self.browser.set_selenium_timeout(timedelta(seconds=1))
         search_input_locator = '//*[@id="searchform"]/div/div/div[1]/input'
         try:
-            self.browser.wait_until_element_is_visible(search_input_locator, timeout=timedelta(seconds=1))
+            self.browser.wait_until_element_is_visible(search_input_locator, )
         except AssertionError as ex:
             self.browser.click_element_if_visible('//*[@id="p-search"]/a')
-        self.browser.input_text_when_element_is_visible(search_input_locator, word)
+        try:
+            self.browser.input_text_when_element_is_visible(search_input_locator, word)
+        except AssertionError as ex:
+            self.browser.input_text_when_element_is_visible('//*[@id="searchInput"]', word)
         self.browser.click_button_when_visible('//*[@id="searchform"]/div/button')
+        self.browser.set_selenium_timeout(old_timeout)
    
 
 class PersonWikipediaRobot(WikipediaRobot):
