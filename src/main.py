@@ -25,7 +25,7 @@ def find_wikipedia_people_by_name(people: List[str] = SCIENTISTS):
     progress_display(
         elements=people,
         general_description="Extracting people information...",
-        element_description=lambda scientist: f"Extracting information about {scientist}",
+        element_description=lambda scientist: f"Extracting information about {scientist}...",
         procedure=find_wikipedia_person_by_name
     )
     robot.say_goodbye()
