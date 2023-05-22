@@ -1,10 +1,10 @@
 # Robotic Researcher
 
-Welcome to Quandri's Robotic Researcher. This software allows you to extract some basic information from someone using the Wikipedia webpage.
+Welcome to Robotic Researcher. This software allows you to extract some basic information from someone using the Wikipedia webpage.
 
 ## Prerequisites
 
-- :snake: Python 3.11.1
+- :snake: Python 3.11.1 and poetry
 - Chrome Driver / Gecko Driver (Selenium)
 
 ## Environment Variables
@@ -12,17 +12,11 @@ Welcome to Quandri's Robotic Researcher. This software allows you to extract som
 - WIKIPEDIA_URL: URL for wikipedia site used to extract information. Default: 'https://en.wikipedia.org/'
 
 
-## Installation
-
-```
-python -m venv venv # Optional
-source venv/bin/activate # Optional
-pip install -r requirements_dev.txt # If testing libraries are not needed, you can use the requirements.txt file
-```
-
 ## How to run
 
 ```
+poetry install
+poetry shell
 cd src
 python main.py
 ```
@@ -41,11 +35,11 @@ python main.py [COMMAND] --help
 ## Run tests
 
 ```
-pytest .
+poetry run pytest .
 ```
 
 ## Run coverage
 ```
-pytest --cov-report=xml --cov=src src # To get the report
-pytest --cov=src src # Without the report
+poetry run pytest --cov-report=xml --cov=src src # To get the report
+poetry run pytest --cov=src src # Without the report
 ```
