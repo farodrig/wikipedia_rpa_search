@@ -3,7 +3,7 @@ from tempfile import NamedTemporaryFile
 
 from typer.testing import CliRunner
 
-from config import SRC_PATH, SCIENTISTS
+from config import SCIENTISTS, SRC_PATH
 from main import app
 
 runner = CliRunner()

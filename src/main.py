@@ -1,13 +1,13 @@
 import json
 from pathlib import Path
-from typing import Annotated, List
+from typing import Annotated
 
 from rich import print, progress
 from rich.console import Console
-from robots.wikipedia_robot import PersonWikipediaRobot
 from typer import Context, Exit, Option, Typer
 
 from config import SCIENTISTS, SRC_PATH
+from robots.wikipedia_robot import PersonWikipediaRobot
 from utils import progress_display
 
 robot = PersonWikipediaRobot()
@@ -23,7 +23,7 @@ def find_wikipedia_person_by_name(name: str):
 
 
 @app.command()
-def find_wikipedia_people_by_name(people: List[str] = SCIENTISTS):
+def find_wikipedia_people_by_name(people: list[str] = SCIENTISTS):
     robot.say_hello()
     print(f"We are going to extract data from wikipedia for these people: {people}")
 
@@ -55,7 +55,7 @@ def find_wikipedia_people_from_file(
         except json.JSONDecodeError as e:
             error_console.print_exception()
             error_console.print(default_file_error_message)
-            raise Exit(code=1)
+            raise Exit(code=1) from e
 
     if not isinstance(people_names, list):
         error_console.print(default_file_error_message)

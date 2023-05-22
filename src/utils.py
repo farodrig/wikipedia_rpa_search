@@ -1,17 +1,17 @@
+from collections.abc import Callable
 from datetime import date
-from typing import Callable, List, Optional, TypeVar
+from typing import TypeVar
 
 from dateutil.relativedelta import relativedelta
 from rich.progress import Progress
 
-
 T = TypeVar('T')
 
 def progress_display(
-    elements: List[T],
+    elements: list[T],
     general_description: str, 
     procedure: Callable[[T], None],
-    element_description: Optional[Callable[[T], str]],
+    element_description: Callable[[T], str] | None,
     **kwargs,
 ):
     with Progress() as progress:
@@ -23,6 +23,6 @@ def progress_display(
             progress.advance(task)
 
 
-def calculate_age(start_date: date, end_date: Optional[date]) -> int:
+def calculate_age(start_date: date, end_date: date | None) -> int:
     age = relativedelta(end_date or date.today(), start_date)
     return age.years

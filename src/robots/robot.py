@@ -1,11 +1,10 @@
-from typing import Optional
 
 from rich import print
 from RPA.Browser.Selenium import AliasType, Selenium
 
 
 class Robot:
-    def __init__(self, name, browser: Optional[Selenium] = None):
+    def __init__(self, name, browser: Selenium | None = None):
         self.name = name
         self.browser = browser or Selenium()
 

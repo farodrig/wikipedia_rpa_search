@@ -1,19 +1,18 @@
 from dataclasses import dataclass
 from datetime import date
-from typing import Optional
 
 from utils import calculate_age
 
 
 @dataclass(frozen=True)
 class PersonProfile:
-    name: Optional[str]
-    description: Optional[str]
-    birth_date: Optional[date]
-    death_date: Optional[date]
+    name: str | None
+    description: str | None
+    birth_date: date | None
+    death_date: date | None
 
     @property
-    def age(self) -> Optional[int]:
+    def age(self) -> int | None:
         if self.birth_date:
             return calculate_age(self.birth_date, self.death_date)
         return None
